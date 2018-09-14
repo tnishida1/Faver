@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		E12E6A4F2145E66400AAE7DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A4E2145E66400AAE7DF /* AppDelegate.swift */; };
-		E12E6A512145E66400AAE7DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A502145E66400AAE7DF /* ViewController.swift */; };
 		E12E6A542145E66400AAE7DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E12E6A522145E66400AAE7DF /* Main.storyboard */; };
 		E12E6A562145E66500AAE7DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E12E6A552145E66500AAE7DF /* Assets.xcassets */; };
 		E12E6A592145E66500AAE7DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E12E6A572145E66500AAE7DF /* LaunchScreen.storyboard */; };
 		E12E6A642145E66600AAE7DF /* FaverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A632145E66600AAE7DF /* FaverTests.swift */; };
 		E12E6A6F2145E66600AAE7DF /* FaverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A6E2145E66600AAE7DF /* FaverUITests.swift */; };
+		E12E6A7D2145E6D600AAE7DF /* InsertItemScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */; };
+		E1D2FE82214B3D0D0016C9AF /* Faver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1D2FE80214B3D0D0016C9AF /* Faver.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,6 @@
 /* Begin PBXFileReference section */
 		E12E6A4B2145E66400AAE7DF /* Faver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Faver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E12E6A4E2145E66400AAE7DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E12E6A502145E66400AAE7DF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E12E6A532145E66400AAE7DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E12E6A552145E66500AAE7DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E12E6A582145E66500AAE7DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +47,8 @@
 		E12E6A6A2145E66600AAE7DF /* FaverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FaverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E12E6A6E2145E66600AAE7DF /* FaverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaverUITests.swift; sourceTree = "<group>"; };
 		E12E6A702145E66600AAE7DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertItemScreen.swift; sourceTree = "<group>"; };
+		E1D2FE81214B3D0D0016C9AF /* Faver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Faver.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				E12E6A4E2145E66400AAE7DF /* AppDelegate.swift */,
-				E12E6A502145E66400AAE7DF /* ViewController.swift */,
+				E1D2FE80214B3D0D0016C9AF /* Faver.xcdatamodeld */,
 				E12E6A522145E66400AAE7DF /* Main.storyboard */,
+				E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */,
 				E12E6A552145E66500AAE7DF /* Assets.xcassets */,
 				E12E6A572145E66500AAE7DF /* LaunchScreen.storyboard */,
 				E12E6A5A2145E66600AAE7DF /* Info.plist */,
@@ -256,8 +259,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E12E6A512145E66400AAE7DF /* ViewController.swift in Sources */,
 				E12E6A4F2145E66400AAE7DF /* AppDelegate.swift in Sources */,
+				E12E6A7D2145E6D600AAE7DF /* InsertItemScreen.swift in Sources */,
+				E1D2FE82214B3D0D0016C9AF /* Faver.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +588,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E1D2FE80214B3D0D0016C9AF /* Faver.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E1D2FE81214B3D0D0016C9AF /* Faver.xcdatamodel */,
+			);
+			currentVersion = E1D2FE81214B3D0D0016C9AF /* Faver.xcdatamodel */;
+			path = Faver.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E12E6A432145E66400AAE7DF /* Project object */;
 }
