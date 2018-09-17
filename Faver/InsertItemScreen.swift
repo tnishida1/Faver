@@ -10,29 +10,39 @@ import UIKit
 
 class InsertItemScreen: UIViewController {
 
-    @IBAction func DoneButton(_ sender: Any) {
-    }
-    @IBOutlet weak var TextBox: UITextField!
+    @IBOutlet weak var textBox: UITextField!
+    @IBOutlet weak var doneButton: UIButton!
+
+    
+    @IBOutlet weak var labelVar1: UILabel!
+    @IBOutlet weak var labelVar2: UILabel!
+    @IBOutlet weak var labelVar3: UILabel!
+    @IBOutlet weak var labelVar4: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        /*
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 38, y: 100, width: 250, height: 210)
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradient.locations = [0, 0.1]
+        labelVar4.layer.mask = gradient
+        */
 
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func donePressed(_ sender: Any) {
+        self.performSegue(withIdentifier: "goToList", sender: self)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func textBoxAction(_ sender: Any) {
+        labelVar4.text = labelVar3.text
+        labelVar3.text = labelVar2.text
+        labelVar2.text = labelVar1.text
+        labelVar1.text = textBox.text
+        textBox.text = ""
     }
-    */
-
+    
 }
+
