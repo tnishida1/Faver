@@ -100,10 +100,10 @@
 			isa = PBXGroup;
 			children = (
 				E12E6A4E2145E66400AAE7DF /* AppDelegate.swift */,
-				E1D2FE80214B3D0D0016C9AF /* Faver.xcdatamodeld */,
-				E12E6A522145E66400AAE7DF /* Main.storyboard */,
-				E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */,
 				E1309A55214DB75E0034FE12 /* ListScreen.swift */,
+				E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */,
+				E12E6A522145E66400AAE7DF /* Main.storyboard */,
+				E1D2FE80214B3D0D0016C9AF /* Faver.xcdatamodeld */,
 				E12E6A552145E66500AAE7DF /* Assets.xcassets */,
 				E12E6A5A2145E66600AAE7DF /* Info.plist */,
 			);
