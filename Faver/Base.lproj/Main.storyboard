@@ -130,6 +130,23 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="13b-QA-ad0">
+                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem systemItem="favorites" id="ypR-sF-N9V"/>
+                                    <tabBarItem systemItem="more" id="idJ-wb-8IJ"/>
+                                </items>
+                            </tabBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EqQ-B6-rGZ">
+                                <rect key="frame" x="253" y="618" width="59" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="."/>
+                                <connections>
+                                    <action selector="listButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wKx-Xv-ubD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -149,6 +166,7 @@
                         <outlet property="labelVar2" destination="lGR-YF-74h" id="bbV-Z2-V4l"/>
                         <outlet property="labelVar3" destination="P4H-TO-16r" id="HjY-Rm-fpD"/>
                         <outlet property="labelVar4" destination="BbQ-pI-OxA" id="19f-iH-iIx"/>
+                        <outlet property="listButton" destination="EqQ-B6-rGZ" id="D2s-kb-zq6"/>
                         <outlet property="textField" destination="ccv-4S-wgg" id="ZAw-Rp-Zg1"/>
                         <segue destination="nEb-He-AmU" kind="showDetail" identifier="goToList" id="4rt-AR-zKj"/>
                     </connections>
@@ -177,9 +195,9 @@
                                 </items>
                             </tabBar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaq-br-S3L">
-                                <rect key="frame" x="70" y="618" width="48" height="49"/>
+                                <rect key="frame" x="63" y="618" width="62" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Home"/>
+                                <state key="normal" title="."/>
                                 <connections>
                                     <action selector="tabBarButtonPress:" destination="nEb-He-AmU" eventType="touchUpInside" id="Er3-vN-Ghv"/>
                                 </connections>

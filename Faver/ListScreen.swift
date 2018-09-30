@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 class ListScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -27,6 +28,7 @@ class ListScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.fetchData()
         self.listTable.reloadData()
         
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -40,8 +42,7 @@ class ListScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let name = listArray[indexPath.row]
-        print(name.itemName? + " " + name.itemMeasure?)
-        cell.textLabel?.text = name.itemName? + " " + name.itemMeasure?
+        cell.textLabel!.text = name.itemName! + " " + name.itemMeasure!
         return cell
     }
     
