@@ -27,10 +27,13 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
     var strArray = [String]()
     var listArray:[List] = []
     var globalNotificationNum = 0
+    var inputAmount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.delegate = self
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
         /*
         let gradient = CAGradientLayer()
         gradient.frame = CGRect(x: 38, y: 100, width: 250, height: 210)
@@ -51,36 +54,17 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
             strArray = savedText!.components(separatedBy: " ")
             if strArray.count > 1 && strArray.count < 4
             {
-                var item: String!
-                var quantity: String!
-                
                 if strArray.count == 3 { //4 oz peanuts
                     myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
                     myList.setValue(strArray[1], forKey: "itemMeasure")
                     myList.setValue(strArray[2], forKey: "itemName")
-                    item = strArray[2]
-                    quantity = strArray[0] + " " + strArray[1]
                 }
                 else{ //2 banana
-                    myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
+                    myList.setValue(Int(strArray[1]), forKey: "itemQuantity")
                     myList.setValue("whole", forKey: "itemMeasure")
-                    myList.setValue(strArray[1], forKey: "itemName")
-                    item = strArray[1]
-                    quantity = strArray[0] + " whole"
+                    myList.setValue(strArray[0], forKey: "itemName")
                 }
-                
-                let lastItem = listArray[listArray.endIndex]
-                
-                let content = UNMutableNotificationContent()
-                content.title = "Your " + lastItem.itemName! + " is going to spoil soon!"
-                content.body = "You have " + quantity + item + "that you have not used yet."
-                globalNotificationNum += 1
-                content.badge = globalNotificationNum as NSNumber
-                
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-                let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
-                
-                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                inputAmount+=1
             }
             else {
                 print("incorrect input buddy")
@@ -102,6 +86,30 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func donePressed(_ sender: Any) {
+        self.fetchData()
+        //print(listArray.count)
+        let rangeMin = listArray.count - inputAmount
+        let rangeMax = listArray.count - 1
+        for item in rangeMin...rangeMax {
+            
+            let content = UNMutableNotificationContent()
+            
+            let itemQ :String = String(listArray[item].itemQuantity)
+            content.title = "Your " + listArray[item].itemName! + " is going to spoil soon!"
+            content.body = "You have " + itemQ + " " + listArray[item].itemMeasure! + " " + listArray[item].itemName! + " that you have not used yet."
+            globalNotificationNum += 1
+            content.threadIdentifier = "faver"
+            content.badge = globalNotificationNum as NSNumber
+
+            let number = arc4random_uniform(20) + 10
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(number), repeats: false)
+            let request = UNNotificationRequest(identifier: listArray[item].itemName!, content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            //print("\(ship.value) is from \(ship.key)")
+        }
+        inputAmount = 0
+        
         self.performSegue(withIdentifier: "goToList", sender: self)
     }
     
@@ -116,6 +124,18 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
         labelVar1.text = textField.text
         
         textField.text = ""
+    }
+    
+    func fetchData(){
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        do {
+            listArray = try context.fetch(List.fetchRequest())
+        }
+        catch {
+            print(error)
+        }
     }
     
 }

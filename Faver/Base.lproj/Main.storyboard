@@ -188,7 +188,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <tabBarItem title="Home" id="nhi-8T-KB7">
+                                    <tabBarItem systemItem="favorites" id="nhi-8T-KB7">
                                         <color key="badgeColor" red="0.1762289742372567" green="0.0015390543941958823" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tabBarItem>
                                     <tabBarItem systemItem="more" id="wxL-49-jpk"/>

@@ -22,13 +22,11 @@ class ListScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.shared.applicationIconBadgeNumber = 0
         listTable.delegate = self
         listTable.dataSource = self
-        
         self.fetchData()
         self.listTable.reloadData()
-        
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
