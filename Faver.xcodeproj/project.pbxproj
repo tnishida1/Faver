@@ -13,7 +13,8 @@
 		E12E6A642145E66600AAE7DF /* FaverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A632145E66600AAE7DF /* FaverTests.swift */; };
 		E12E6A6F2145E66600AAE7DF /* FaverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A6E2145E66600AAE7DF /* FaverUITests.swift */; };
 		E12E6A7D2145E6D600AAE7DF /* InsertItemScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */; };
-		E1309A56214DB75E0034FE12 /* ListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1309A55214DB75E0034FE12 /* ListScreen.swift */; };
+		E1397641216DEB0F009D37E2 /* dateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1397640216DEB0F009D37E2 /* dateScreen.swift */; };
+		E1BDEBB2216DEC0100CDA2EB /* ListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BDEBB1216DEC0000CDA2EB /* ListScreen.swift */; };
 		E1D2FE82214B3D0D0016C9AF /* Faver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1D2FE80214B3D0D0016C9AF /* Faver.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +48,8 @@
 		E12E6A6E2145E66600AAE7DF /* FaverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaverUITests.swift; sourceTree = "<group>"; };
 		E12E6A702145E66600AAE7DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertItemScreen.swift; sourceTree = "<group>"; };
-		E1309A55214DB75E0034FE12 /* ListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreen.swift; sourceTree = "<group>"; };
+		E1397640216DEB0F009D37E2 /* dateScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateScreen.swift; sourceTree = "<group>"; };
+		E1BDEBB1216DEC0000CDA2EB /* ListScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListScreen.swift; sourceTree = "<group>"; };
 		E1D2FE81214B3D0D0016C9AF /* Faver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Faver.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,8 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				E12E6A4E2145E66400AAE7DF /* AppDelegate.swift */,
-				E1309A55214DB75E0034FE12 /* ListScreen.swift */,
 				E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */,
+				E1397640216DEB0F009D37E2 /* dateScreen.swift */,
+				E1BDEBB1216DEC0000CDA2EB /* ListScreen.swift */,
 				E12E6A522145E66400AAE7DF /* Main.storyboard */,
 				E1D2FE80214B3D0D0016C9AF /* Faver.xcdatamodeld */,
 				E12E6A552145E66500AAE7DF /* Assets.xcassets */,
@@ -258,10 +261,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1309A56214DB75E0034FE12 /* ListScreen.swift in Sources */,
+				E1BDEBB2216DEC0100CDA2EB /* ListScreen.swift in Sources */,
 				E12E6A4F2145E66400AAE7DF /* AppDelegate.swift in Sources */,
 				E12E6A7D2145E6D600AAE7DF /* InsertItemScreen.swift in Sources */,
 				E1D2FE82214B3D0D0016C9AF /* Faver.xcdatamodeld in Sources */,
+				E1397641216DEB0F009D37E2 /* dateScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

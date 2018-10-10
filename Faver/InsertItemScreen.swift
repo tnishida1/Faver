@@ -21,6 +21,7 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var labelVar2: UILabel!
     @IBOutlet weak var labelVar3: UILabel!
     @IBOutlet weak var labelVar4: UILabel!
+    @IBOutlet weak var useageDateSwitch: UISwitch!
     
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var savedText: String!
@@ -28,6 +29,12 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
     var listArray:[List] = []
     var globalNotificationNum = 0
     var inputAmount = 0
+    var useByDate = 0
+    
+    
+    struct globalVar {
+        static var currentItem = String()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +52,16 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func switchAction(_ sender: UISwitch) {
+        if sender.isOn == true {
+            useByDate = 1
+        }
+        else {
+            useByDate = 0
+        }
+    }
+
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField.text != "" {
@@ -58,12 +75,15 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
                     myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
                     myList.setValue(strArray[1], forKey: "itemMeasure")
                     myList.setValue(strArray[2], forKey: "itemName")
+                    globalVar.currentItem = strArray[2]
                 }
                 else{ //2 banana
-                    myList.setValue(Int(strArray[1]), forKey: "itemQuantity")
+                    myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
                     myList.setValue("whole", forKey: "itemMeasure")
-                    myList.setValue(strArray[0], forKey: "itemName")
+                    myList.setValue(strArray[1], forKey: "itemName")
+                    globalVar.currentItem = strArray[1]
                 }
+                globalNotificationNum += 1
                 inputAmount+=1
             }
             else {
@@ -82,10 +102,40 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
         catch {
             print(error)
         }
+        if useByDate == 1
+        {
+            self.performSegue(withIdentifier: "homeToDate", sender: self)
+        }
         return true
     }
     
     @IBAction func donePressed(_ sender: Any) {
+        if textField.text != "" {
+            
+            let myList = NSEntityDescription.insertNewObject(forEntityName: "List", into: context)
+            savedText = textField.text
+            strArray = savedText!.components(separatedBy: " ")
+            if strArray.count > 1 && strArray.count < 4
+            {
+                if strArray.count == 3 { //4 oz peanuts
+                    myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
+                    myList.setValue(strArray[1], forKey: "itemMeasure")
+                    myList.setValue(strArray[2], forKey: "itemName")
+                    globalVar.currentItem = strArray[2]
+                }
+                else{ //2 banana
+                    myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
+                    myList.setValue("whole", forKey: "itemMeasure")
+                    myList.setValue(strArray[1], forKey: "itemName")
+                    globalVar.currentItem = strArray[1]
+                }
+                globalNotificationNum += 1
+                inputAmount+=1
+            }
+            else {
+                print("incorrect input buddy")
+            }
+        }
         self.fetchData()
         //print(listArray.count)
         let rangeMin = listArray.count - inputAmount
@@ -97,11 +147,11 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
             let itemQ :String = String(listArray[item].itemQuantity)
             content.title = "Your " + listArray[item].itemName! + " is going to spoil soon!"
             content.body = "You have " + itemQ + " " + listArray[item].itemMeasure! + " " + listArray[item].itemName! + " that you have not used yet."
-            globalNotificationNum += 1
             content.threadIdentifier = "faver"
             content.badge = globalNotificationNum as NSNumber
 
-            let number = arc4random_uniform(20) + 10
+            //let number = arc4random_uniform(10) + 10
+            let number = 5
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(number), repeats: false)
             let request = UNNotificationRequest(identifier: listArray[item].itemName!, content: content, trigger: trigger)
             

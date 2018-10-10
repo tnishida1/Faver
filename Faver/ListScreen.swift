@@ -23,6 +23,7 @@ class ListScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         UIApplication.shared.applicationIconBadgeNumber = 0
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
         listTable.delegate = self
         listTable.dataSource = self
         self.fetchData()
