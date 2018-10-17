@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		835022D891ABF12E9A140547 /* Pods_Faver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6511EC730C8718B440A54510 /* Pods_Faver.framework */; };
 		E12E6A4F2145E66400AAE7DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A4E2145E66400AAE7DF /* AppDelegate.swift */; };
 		E12E6A542145E66400AAE7DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E12E6A522145E66400AAE7DF /* Main.storyboard */; };
 		E12E6A562145E66500AAE7DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E12E6A552145E66500AAE7DF /* Assets.xcassets */; };
 		E12E6A642145E66600AAE7DF /* FaverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A632145E66600AAE7DF /* FaverTests.swift */; };
 		E12E6A6F2145E66600AAE7DF /* FaverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A6E2145E66600AAE7DF /* FaverUITests.swift */; };
 		E12E6A7D2145E6D600AAE7DF /* InsertItemScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */; };
-		E1397641216DEB0F009D37E2 /* dateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1397640216DEB0F009D37E2 /* dateScreen.swift */; };
 		E1BDEBB2216DEC0100CDA2EB /* ListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BDEBB1216DEC0000CDA2EB /* ListScreen.swift */; };
 		E1D2FE82214B3D0D0016C9AF /* Faver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1D2FE80214B3D0D0016C9AF /* Faver.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -36,6 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6511EC730C8718B440A54510 /* Pods_Faver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Faver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A96133E4C4A0B310AC9A972E /* Pods_FaverTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaverTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D915FC441918CC3344693849 /* Pods-Faver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faver/Pods-Faver.debug.xcconfig"; sourceTree = "<group>"; };
+		E0BB2BC3D719C356C017D3A0 /* Pods-Faver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faver.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faver/Pods-Faver.release.xcconfig"; sourceTree = "<group>"; };
 		E12E6A4B2145E66400AAE7DF /* Faver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Faver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E12E6A4E2145E66400AAE7DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E12E6A532145E66400AAE7DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -48,9 +52,9 @@
 		E12E6A6E2145E66600AAE7DF /* FaverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaverUITests.swift; sourceTree = "<group>"; };
 		E12E6A702145E66600AAE7DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertItemScreen.swift; sourceTree = "<group>"; };
-		E1397640216DEB0F009D37E2 /* dateScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateScreen.swift; sourceTree = "<group>"; };
 		E1BDEBB1216DEC0000CDA2EB /* ListScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListScreen.swift; sourceTree = "<group>"; };
 		E1D2FE81214B3D0D0016C9AF /* Faver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Faver.xcdatamodel; sourceTree = "<group>"; };
+		E788DBA183A3EFA001184C1D /* Pods_FaverUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaverUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				835022D891ABF12E9A140547 /* Pods_Faver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14102FFCA7AB860F011BE547 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D915FC441918CC3344693849 /* Pods-Faver.debug.xcconfig */,
+				E0BB2BC3D719C356C017D3A0 /* Pods-Faver.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6ADF70B83EAF8668C7E65718 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6511EC730C8718B440A54510 /* Pods_Faver.framework */,
+				A96133E4C4A0B310AC9A972E /* Pods_FaverTests.framework */,
+				E788DBA183A3EFA001184C1D /* Pods_FaverUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E12E6A422145E66400AAE7DF = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +109,8 @@
 				E12E6A622145E66600AAE7DF /* FaverTests */,
 				E12E6A6D2145E66600AAE7DF /* FaverUITests */,
 				E12E6A4C2145E66400AAE7DF /* Products */,
+				14102FFCA7AB860F011BE547 /* Pods */,
+				6ADF70B83EAF8668C7E65718 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,7 +129,6 @@
 			children = (
 				E12E6A4E2145E66400AAE7DF /* AppDelegate.swift */,
 				E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */,
-				E1397640216DEB0F009D37E2 /* dateScreen.swift */,
 				E1BDEBB1216DEC0000CDA2EB /* ListScreen.swift */,
 				E12E6A522145E66400AAE7DF /* Main.storyboard */,
 				E1D2FE80214B3D0D0016C9AF /* Faver.xcdatamodeld */,
@@ -138,9 +163,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E12E6A732145E66600AAE7DF /* Build configuration list for PBXNativeTarget "Faver" */;
 			buildPhases = (
+				951D99B0445B488D7121DB0B /* [CP] Check Pods Manifest.lock */,
 				E12E6A472145E66400AAE7DF /* Sources */,
 				E12E6A482145E66400AAE7DF /* Frameworks */,
 				E12E6A492145E66400AAE7DF /* Resources */,
+				BD4C37226C20624BFEE02AEF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -256,6 +283,49 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		951D99B0445B488D7121DB0B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Faver-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD4C37226C20624BFEE02AEF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Faver/Pods-Faver-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/RAMReel/RAMReel.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMAnimatedTabBarController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMReel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Faver/Pods-Faver-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E12E6A472145E66400AAE7DF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -265,7 +335,6 @@
 				E12E6A4F2145E66400AAE7DF /* AppDelegate.swift in Sources */,
 				E12E6A7D2145E6D600AAE7DF /* InsertItemScreen.swift in Sources */,
 				E1D2FE82214B3D0D0016C9AF /* Faver.xcdatamodeld in Sources */,
-				E1397641216DEB0F009D37E2 /* dateScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,11 +497,14 @@
 		};
 		E12E6A742145E66600AAE7DF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D915FC441918CC3344693849 /* Pods-Faver.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JAVF85W983;
 				INFOPLIST_FILE = Faver/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -446,11 +518,14 @@
 		};
 		E12E6A752145E66600AAE7DF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0BB2BC3D719C356C017D3A0 /* Pods-Faver.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JAVF85W983;
 				INFOPLIST_FILE = Faver/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

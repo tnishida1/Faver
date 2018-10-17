@@ -5,10 +5,17 @@
 //  Created by Takumi Nishida on 9/9/18.
 //  Copyright © 2018 Takumi Nishida. All rights reserved.
 //
-
 import UIKit
 import CoreData
 import UserNotifications
+
+extension String {
+    var isNumeric : Bool {
+        get {
+            return Double(self) != nil
+        }
+    }
+}
 
 class InsertItemScreen: UIViewController, UITextFieldDelegate {
 
@@ -22,6 +29,10 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var labelVar3: UILabel!
     @IBOutlet weak var labelVar4: UILabel!
     @IBOutlet weak var useageDateSwitch: UISwitch!
+    @IBOutlet weak var dateSelector: UIDatePicker!
+    @IBOutlet weak var error: UITextView!
+    
+    private var datePicker: UIDatePicker?
     
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var savedText: String!
@@ -30,14 +41,17 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
     var globalNotificationNum = 0
     var inputAmount = 0
     var useByDate = 0
-    
-    
-    struct globalVar {
-        static var currentItem = String()
-    }
+    var curDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        datePicker = dateSelector
+        datePicker?.datePickerMode = .date
+        datePicker?.addTarget(self, action: #selector(InsertItemScreen.dateChanged(datePicker:)), for: .valueChanged)
+        
+        
+        error.layer.opacity = 0
         textField.delegate = self
         UIApplication.shared.applicationIconBadgeNumber = 0
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
@@ -52,96 +66,108 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
+    @objc func dateChanged(datePicker: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        curDate = datePicker.date
+        view.endEditing(true)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     @IBAction func switchAction(_ sender: UISwitch) {
         if sender.isOn == true {
             useByDate = 1
+            dateSelector.isEnabled = true
+            dateSelector.isHidden = false
         }
         else {
             useByDate = 0
+            dateSelector.isEnabled = false
+            dateSelector.isHidden = true
         }
+    }
+    
+    func issueError() {
+        error.layer.opacity = 1
+        UIView.animate(withDuration: 1, animations: {
+            self.error.layer.opacity = 0
+        })
+    }
+    
+    func handleItem(item: String) -> Bool {
+        
+        let myList = NSEntityDescription.insertNewObject(forEntityName: "List", into: context)
+        if strArray.count == 3 { //4 oz peanuts
+            myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
+            myList.setValue(strArray[1], forKey: "itemMeasure")
+            myList.setValue(strArray[2], forKey: "itemName")
+            globalNotificationNum += 1
+            inputAmount+=1
+        }
+        else{ //2 banana
+            myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
+            myList.setValue("whole", forKey: "itemMeasure")
+            myList.setValue(strArray[1], forKey: "itemName")
+            globalNotificationNum += 1
+            inputAmount+=1
+        }
+        if useByDate == 1 {
+            myList.setValue(curDate, forKey: "shelfLife")
+            print(curDate)
+            return true
+        }
+        else {
+            myList.setValue(nil, forKey: "shelfLife")
+            //search for date inside database
+        }
+        return true
     }
 
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         if textField.text != "" {
-        
-            let myList = NSEntityDescription.insertNewObject(forEntityName: "List", into: context)
-            savedText = textField.text
-            strArray = savedText!.components(separatedBy: " ")
-            if strArray.count > 1 && strArray.count < 4
-            {
-                if strArray.count == 3 { //4 oz peanuts
-                    myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
-                    myList.setValue(strArray[1], forKey: "itemMeasure")
-                    myList.setValue(strArray[2], forKey: "itemName")
-                    globalVar.currentItem = strArray[2]
+            strArray = textField.text!.components(separatedBy: " ")
+            if (strArray.count > 1) && (strArray.count < 4) && (strArray[0].isNumeric) {
+                if handleItem(item: textField.text!) == true {
+                    do {
+                        try context.save()
+                    }
+                    catch {
+                        print(error)
+                    }
+                    return true
                 }
-                else{ //2 banana
-                    myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
-                    myList.setValue("whole", forKey: "itemMeasure")
-                    myList.setValue(strArray[1], forKey: "itemName")
-                    globalVar.currentItem = strArray[1]
-                }
-                globalNotificationNum += 1
-                inputAmount+=1
             }
             else {
-                print("incorrect input buddy")
-                return false;
+                issueError()
+                return false
             }
         }
-        else {
-            print("incorrect input buddy")
-            return false;
-        }
-        
-        do {
-            try context.save()
-        }
-        catch {
-            print(error)
-        }
-        if useByDate == 1
-        {
-            self.performSegue(withIdentifier: "homeToDate", sender: self)
-        }
-        return true
+        return false
     }
     
     @IBAction func donePressed(_ sender: Any) {
         if textField.text != "" {
-            
-            let myList = NSEntityDescription.insertNewObject(forEntityName: "List", into: context)
-            savedText = textField.text
-            strArray = savedText!.components(separatedBy: " ")
+            strArray = textField.text!.components(separatedBy: " ")
             if strArray.count > 1 && strArray.count < 4
             {
-                if strArray.count == 3 { //4 oz peanuts
-                    myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
-                    myList.setValue(strArray[1], forKey: "itemMeasure")
-                    myList.setValue(strArray[2], forKey: "itemName")
-                    globalVar.currentItem = strArray[2]
+                if handleItem(item: textField.text!) == true {
+                    do {
+                        try context.save()
+                    }
+                    catch {
+                        print(error)
+                    }
                 }
-                else{ //2 banana
-                    myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
-                    myList.setValue("whole", forKey: "itemMeasure")
-                    myList.setValue(strArray[1], forKey: "itemName")
-                    globalVar.currentItem = strArray[1]
-                }
-                globalNotificationNum += 1
-                inputAmount+=1
-            }
-            else {
-                print("incorrect input buddy")
             }
         }
         self.fetchData()
-        //print(listArray.count)
         let rangeMin = listArray.count - inputAmount
         let rangeMax = listArray.count - 1
         for item in rangeMin...rangeMax {
-            
             let content = UNMutableNotificationContent()
             
             let itemQ :String = String(listArray[item].itemQuantity)
@@ -151,12 +177,20 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
             content.badge = globalNotificationNum as NSNumber
 
             //let number = arc4random_uniform(10) + 10
-            let number = 5
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(number), repeats: false)
-            let request = UNNotificationRequest(identifier: listArray[item].itemName!, content: content, trigger: trigger)
             
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-            //print("\(ship.value) is from \(ship.key)")
+            //here is where we set the time for the notification
+            if listArray[item].shelfLife == nil {
+                let number = 5
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(number), repeats: false)
+                let request = UNNotificationRequest(identifier: listArray[item].itemName!, content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            }
+            else {
+                let timeInterval = listArray[item].shelfLife?.timeIntervalSinceNow
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval!, repeats: false)
+                let request = UNNotificationRequest(identifier: listArray[item].itemName!, content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            }
         }
         inputAmount = 0
         
