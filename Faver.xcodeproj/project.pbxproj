@@ -14,6 +14,8 @@
 		E12E6A642145E66600AAE7DF /* FaverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A632145E66600AAE7DF /* FaverTests.swift */; };
 		E12E6A6F2145E66600AAE7DF /* FaverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A6E2145E66600AAE7DF /* FaverUITests.swift */; };
 		E12E6A7D2145E6D600AAE7DF /* InsertItemScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */; };
+		E1B94B4B217F0439001B5560 /* WordReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B94B4A217F0439001B5560 /* WordReader.swift */; };
+		E1B94B4D217F0779001B5560 /* data.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1B94B4C217F0779001B5560 /* data.txt */; };
 		E1BDEBB2216DEC0100CDA2EB /* ListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BDEBB1216DEC0000CDA2EB /* ListScreen.swift */; };
 		E1D2FE82214B3D0D0016C9AF /* Faver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1D2FE80214B3D0D0016C9AF /* Faver.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -52,6 +54,8 @@
 		E12E6A6E2145E66600AAE7DF /* FaverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaverUITests.swift; sourceTree = "<group>"; };
 		E12E6A702145E66600AAE7DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertItemScreen.swift; sourceTree = "<group>"; };
+		E1B94B4A217F0439001B5560 /* WordReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordReader.swift; sourceTree = SOURCE_ROOT; };
+		E1B94B4C217F0779001B5560 /* data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.txt; sourceTree = "<group>"; };
 		E1BDEBB1216DEC0000CDA2EB /* ListScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListScreen.swift; sourceTree = "<group>"; };
 		E1D2FE81214B3D0D0016C9AF /* Faver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Faver.xcdatamodel; sourceTree = "<group>"; };
 		E788DBA183A3EFA001184C1D /* Pods_FaverUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaverUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				E12E6A4E2145E66400AAE7DF /* AppDelegate.swift */,
+				E1B94B4C217F0779001B5560 /* data.txt */,
+				E1B94B4A217F0439001B5560 /* WordReader.swift */,
 				E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */,
 				E1BDEBB1216DEC0000CDA2EB /* ListScreen.swift */,
 				E12E6A522145E66400AAE7DF /* Main.storyboard */,
@@ -167,6 +173,7 @@
 				E12E6A472145E66400AAE7DF /* Sources */,
 				E12E6A482145E66400AAE7DF /* Frameworks */,
 				E12E6A492145E66400AAE7DF /* Resources */,
+				F6A271CDF3A6799CCE6D0009 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -264,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E12E6A562145E66500AAE7DF /* Assets.xcassets in Resources */,
+				E1B94B4D217F0779001B5560 /* data.txt in Resources */,
 				E12E6A542145E66400AAE7DF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +311,30 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F6A271CDF3A6799CCE6D0009 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Faver/Pods-Faver-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/RAMReel/RAMReel.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMAnimatedTabBarController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMReel.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Faver/Pods-Faver-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -313,6 +345,7 @@
 				E1BDEBB2216DEC0100CDA2EB /* ListScreen.swift in Sources */,
 				E12E6A4F2145E66400AAE7DF /* AppDelegate.swift in Sources */,
 				E12E6A7D2145E6D600AAE7DF /* InsertItemScreen.swift in Sources */,
+				E1B94B4B217F0439001B5560 /* WordReader.swift in Sources */,
 				E1D2FE82214B3D0D0016C9AF /* Faver.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,6 +6,7 @@
 //  Copyright © 2018 Takumi Nishida. All rights reserved.
 //
 import UIKit
+import RAMReel
 import CoreData
 import UserNotifications
 
@@ -17,8 +18,9 @@ extension String {
     }
 }
 
-class InsertItemScreen: UIViewController, UITextFieldDelegate {
+class InsertItemScreen: UIViewController, UITextFieldDelegate, UICollectionViewDelegate {
 
+    @IBOutlet weak var view2: UIView!
     @IBOutlet weak var textField: UITextField!
     
     @IBOutlet weak var doneButton: UIButton!
@@ -33,6 +35,9 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var error: UITextView!
     
     private var datePicker: UIDatePicker?
+    
+    var dataSource: SimplePrefixQueryDataSource!
+    var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
     
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var savedText: String!
@@ -51,8 +56,8 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
         datePicker?.addTarget(self, action: #selector(InsertItemScreen.dateChanged(datePicker:)), for: .valueChanged)
         
         
-        error.layer.opacity = 0
-        textField.delegate = self
+        //error.layer.opacity = 0
+        //textField.delegate = self
         UIApplication.shared.applicationIconBadgeNumber = 0
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
         /*
@@ -64,6 +69,23 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
         */
 
         // Do any additional setup after loading the view.
+        
+        dataSource = SimplePrefixQueryDataSource(data)
+        
+        ramReel = RAMReel(frame: view2.bounds, dataSource: dataSource, placeholder: "Start by typing…", attemptToDodgeKeyboard: false) {
+            print("Plain:", $0)
+        }
+        
+        ramReel.hooks.append {
+            let r = Array($0.reversed())
+            let j = String(r)
+            print("Reversed:", j)
+        }
+        
+        
+        
+        view2.addSubview(ramReel.view)
+        ramReel.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     @objc func dateChanged(datePicker: UIDatePicker) {
@@ -222,5 +244,19 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate {
         }
     }
     
+    fileprivate let data: [String] = {
+        do {
+            guard let dataPath = Bundle.main.path(forResource: "data", ofType: "txt") else {
+                return []
+            }
+            
+            let data = try WordReader(filepath: dataPath)
+            return data.words
+        }
+        catch let error {
+            print(error)
+            return []
+        }
+    }()
+    
 }
-

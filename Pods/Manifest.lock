@@ -1,3 +1,20 @@
-PODFILE CHECKSUM: 11641fa2ca528e765bb4dbf9c960b758565450c5
+PODS:
+  - RAMAnimatedTabBarController (4.0.1)
+  - RAMReel (4.0.0)
+
+DEPENDENCIES:
+  - RAMAnimatedTabBarController
+  - RAMReel
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - RAMAnimatedTabBarController
+    - RAMReel
+
+SPEC CHECKSUMS:
+  RAMAnimatedTabBarController: 677d6f7ec7e88b1089486f4db49b0a5067e8ad1c
+  RAMReel: 815addc9594886e6816b891a1559058f05ff9580
+
+PODFILE CHECKSUM: 125bfd34d49d3e7814ece823a75fd0370b22a55d
 
 COCOAPODS: 1.5.3
