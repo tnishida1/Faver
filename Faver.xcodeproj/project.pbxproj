@@ -228,10 +228,12 @@
 					};
 					E12E6A5E2145E66600AAE7DF = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = E12E6A4A2145E66400AAE7DF;
 					};
 					E12E6A692145E66600AAE7DF = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = E12E6A4A2145E66400AAE7DF;
 					};
 				};
@@ -488,7 +490,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = takumi.Faver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -509,7 +511,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = takumi.Faver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -529,7 +531,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = takumi.FaverTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Faver.app/Faver";
 			};
@@ -550,7 +552,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = takumi.FaverTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Faver.app/Faver";
 			};
@@ -570,7 +572,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = takumi.FaverUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Faver;
 			};
@@ -590,7 +592,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = takumi.FaverUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Faver;
 			};
