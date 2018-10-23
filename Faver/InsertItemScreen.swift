@@ -6,6 +6,7 @@
 //  Copyright © 2018 Takumi Nishida. All rights reserved.
 //
 import UIKit
+import RAMAnimatedTabBarController
 import RAMReel
 import CoreData
 import UserNotifications
@@ -18,7 +19,8 @@ extension String {
     }
 }
 
-class InsertItemScreen: UIViewController, UITextFieldDelegate, UICollectionViewDelegate {
+class InsertItemScreen: UIViewController, UITextFieldDelegate,
+    UICollectionViewDelegate {
 
     @IBOutlet weak var view2: UIView!
     @IBOutlet weak var textField: UITextField!

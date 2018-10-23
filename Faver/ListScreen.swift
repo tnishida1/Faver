@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import UserNotifications
+import RAMAnimatedTabBarController
 
 class ListScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
