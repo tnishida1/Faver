@@ -9,6 +9,7 @@ import UIKit
 import RAMAnimatedTabBarController
 import RAMReel
 import CoreData
+import PopupDialog
 import UserNotifications
 
 extension String {
@@ -25,13 +26,6 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
     @IBOutlet weak var view2: UIView!
     @IBOutlet weak var textField: UITextField!
     
-    @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var listButton: UIButton!
-    
-    @IBOutlet weak var labelVar1: UILabel!
-    @IBOutlet weak var labelVar2: UILabel!
-    @IBOutlet weak var labelVar3: UILabel!
-    @IBOutlet weak var labelVar4: UILabel!
     @IBOutlet weak var useageDateSwitch: UISwitch!
     @IBOutlet weak var dateSelector: UIDatePicker!
     @IBOutlet weak var error: UITextView!
@@ -57,37 +51,125 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
         datePicker?.datePickerMode = .date
         datePicker?.addTarget(self, action: #selector(InsertItemScreen.dateChanged(datePicker:)), for: .valueChanged)
         
-        
-        //error.layer.opacity = 0
-        //textField.delegate = self
         UIApplication.shared.applicationIconBadgeNumber = 0
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
-        /*
-        let gradient = CAGradientLayer()
-        gradient.frame = CGRect(x: 38, y: 100, width: 250, height: 210)
-        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradient.locations = [0, 0.1]
-        labelVar4.layer.mask = gradient
-        */
-
-        // Do any additional setup after loading the view.
         
         dataSource = SimplePrefixQueryDataSource(data)
-        
-        ramReel = RAMReel(frame: view2.bounds, dataSource: dataSource, placeholder: "Start by typing…", attemptToDodgeKeyboard: false) {
+        ramReel = RAMReel(frame: view2.bounds, dataSource: dataSource, placeholder: "Enter an item…", attemptToDodgeKeyboard: false) {
             print("Plain:", $0)
+            self.showCustomDialog()
         }
         
         ramReel.hooks.append {
+            
+            do {
+                try self.context.save()
+            }
+            catch {
+                print(error)
+            }
+            //self.fetchData()
+            let content = UNMutableNotificationContent()
+            
+            
+            
+            
+
+            
+            /*
+            
+             let rangeMin = listArray.count - inputAmount
+             let rangeMax = listArray.count - 1
+             for item in rangeMin...rangeMax {
+             let content = UNMutableNotificationContent()
+             
+             let itemQ :String = String(listArray[item].itemQuantity)
+             content.title = "Your " + listArray[item].itemName! + " is going to spoil soon!"
+             content.body = "You have " + itemQ + " " + listArray[item].itemMeasure! + " " + listArray[item].itemName! + " that you have not used yet."
+             content.threadIdentifier = "faver"
+             content.badge = globalNotificationNum as NSNumber
+             
+             //let number = arc4random_uniform(10) + 10
+             
+             //here is where we set the time for the notification
+             if listArray[item].shelfLife == nil {
+             let number = 5
+             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(number), repeats: false)
+             let request = UNNotificationRequest(identifier: listArray[item].itemName!, content: content, trigger: trigger)
+             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+             }
+             else {
+             let timeInterval = listArray[item].shelfLife?.timeIntervalSinceNow
+             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval!, repeats: false)
+             let request = UNNotificationRequest(identifier: listArray[item].itemName!, content: content, trigger: trigger)
+             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+             }
+             }
+             inputAmount = 0
+             
+             self.performSegue(withIdentifier: "goToList", sender: self)
+             }
+             
+            }*/
+            
             let r = Array($0.reversed())
             let j = String(r)
             print("Reversed:", j)
         }
         
         
-        
         view2.addSubview(ramReel.view)
         ramReel.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+    
+    func createNotif(str: String) -> Void {
+        
+            if textField.text != "" {
+                strArray = textField.text!.components(separatedBy: " ")
+                if strArray.count > 1 && strArray.count < 4
+                {
+                    if handleItem(item: textField.text!) == true {
+                        do {
+                            try context.save()
+                        }
+                        catch {
+                            print(error)
+                        }
+                    }
+                }
+            }
+            self.fetchData()
+            let rangeMin = listArray.count - inputAmount
+            let rangeMax = listArray.count - 1
+            for item in rangeMin...rangeMax {
+                let content = UNMutableNotificationContent()
+                
+                let itemQ :String = String(listArray[item].itemQuantity)
+                content.title = "Your " + listArray[item].itemName! + " is going to spoil soon!"
+                content.body = "You have " + itemQ + " " + listArray[item].itemMeasure! + " " + listArray[item].itemName! + " that you have not used yet."
+                content.threadIdentifier = "faver"
+                content.badge = globalNotificationNum as NSNumber
+                
+                //let number = arc4random_uniform(10) + 10
+                
+                //here is where we set the time for the notification
+                if listArray[item].shelfLife == nil {
+                    let number = 5
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(number), repeats: false)
+                    let request = UNNotificationRequest(identifier: listArray[item].itemName!, content: content, trigger: trigger)
+                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                }
+                else {
+                    let timeInterval = listArray[item].shelfLife?.timeIntervalSinceNow
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval!, repeats: false)
+                    let request = UNNotificationRequest(identifier: listArray[item].itemName!, content: content, trigger: trigger)
+                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                }
+            inputAmount = 0
+            
+            self.performSegue(withIdentifier: "goToList", sender: self)
+        }
+        
     }
     
     @objc func dateChanged(datePicker: UIDatePicker) {
@@ -124,6 +206,9 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
     func handleItem(item: String) -> Bool {
         
         let myList = NSEntityDescription.insertNewObject(forEntityName: "List", into: context)
+        
+        
+        
         if strArray.count == 3 { //4 oz peanuts
             myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
             myList.setValue(strArray[1], forKey: "itemMeasure")
@@ -152,24 +237,7 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
 
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.text != "" {
-            strArray = textField.text!.components(separatedBy: " ")
-            if (strArray.count > 1) && (strArray.count < 4) && (strArray[0].isNumeric) {
-                if handleItem(item: textField.text!) == true {
-                    do {
-                        try context.save()
-                    }
-                    catch {
-                        print(error)
-                    }
-                    return true
-                }
-            }
-            else {
-                issueError()
-                return false
-            }
-        }
+        
         return false
     }
     
@@ -221,19 +289,6 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
         self.performSegue(withIdentifier: "goToList", sender: self)
     }
     
-    @IBAction func listButtonPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: "goToList", sender: self)
-    }
-    
-    @IBAction func textFieldAction(_ sender: Any) {
-        labelVar4.text = labelVar3.text
-        labelVar3.text = labelVar2.text
-        labelVar2.text = labelVar1.text
-        labelVar1.text = textField.text
-        
-        textField.text = ""
-    }
-    
     func fetchData(){
         
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -246,19 +301,68 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
         }
     }
     
+    
+    func showCustomDialog(animated: Bool = true) {
+        
+        // Create a custom view controller
+        let ratingVC = RatingViewController(nibName: "RatingViewController", bundle: nil)
+        
+        
+        // Create the dialog
+        let popup = PopupDialog(viewController: ratingVC,
+                                buttonAlignment: .horizontal,
+                                transitionStyle: .bounceDown,
+                                tapGestureDismissal: true,
+                                panGestureDismissal: false)
+        
+        // Create first button
+        let buttonOne = CancelButton(title: "CANCEL", height: 60) {
+            print("You canceled the rating dialog")
+        }
+        
+        // Create second button
+        let buttonTwo = DefaultButton(title: "RATE", height: 60) {
+            print("You rated \(ratingVC.cosmosStarRating.rating) stars")
+        }
+        
+        // Add buttons to dialog
+        popup.addButtons([buttonOne, buttonTwo])
+        
+        
+        // Present dialog
+        present(popup, animated: animated, completion: nil)
+    }
+    
+    
     fileprivate let data: [String] = {
-        do {
-            guard let dataPath = Bundle.main.path(forResource: "data", ofType: "txt") else {
+        //Property List file name = regions.plist
+        let pListFileURL = Bundle.main.url(forResource: "item", withExtension: "plist", subdirectory: "")
+        if let pListPath = pListFileURL?.path,
+            let pListData = FileManager.default.contents(atPath: pListPath) {
+            do {
+                let pListObject = try PropertyListSerialization.propertyList(from: pListData, options:PropertyListSerialization.ReadOptions(), format:nil)
+                
+                //Cast pListObject - If expected data type is Array of Dict
+                guard let pListArray = pListObject as? [Dictionary<String, AnyObject>] else {
+                    return []
+                }
+                
+                var arrayOfItems = [String]()
+                
+                for dict in pListArray {
+                    //print(dict["name"] as! String)
+                    arrayOfItems.append(dict["name"] as! String)
+                }
+                
+                return arrayOfItems
+                
+            } catch {
+                print("Error reading regions plist file: \(error)")
                 return []
             }
-            
-            let data = try WordReader(filepath: dataPath)
-            return data.words
         }
-        catch let error {
-            print(error)
-            return []
-        }
+        return []
     }()
     
+
 }

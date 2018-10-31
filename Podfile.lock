@@ -1,20 +1,28 @@
 PODS:
+  - DynamicBlurView (3.0.1)
+  - PopupDialog (0.9.1):
+    - DynamicBlurView (~> 3.0.1)
   - RAMAnimatedTabBarController (4.0.1)
   - RAMReel (4.0.0)
 
 DEPENDENCIES:
+  - PopupDialog (~> 0.9)
   - RAMAnimatedTabBarController
   - RAMReel
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - DynamicBlurView
+    - PopupDialog
     - RAMAnimatedTabBarController
     - RAMReel
 
 SPEC CHECKSUMS:
+  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
+  PopupDialog: 03985b669c29802661c187513bf827340db1ae4d
   RAMAnimatedTabBarController: 677d6f7ec7e88b1089486f4db49b0a5067e8ad1c
   RAMReel: 815addc9594886e6816b891a1559058f05ff9580
 
-PODFILE CHECKSUM: 125bfd34d49d3e7814ece823a75fd0370b22a55d
+PODFILE CHECKSUM: ab69beee870b632a74bb5f7ab7e32ee62fe81562
 
 COCOAPODS: 1.5.3
