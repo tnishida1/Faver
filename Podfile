@@ -7,6 +7,6 @@ target 'Faver' do
 
   pod 'RAMReel'
   pod 'RAMAnimatedTabBarController'
-  pod 'PopupDialog', '~> 0.9'
+  pod 'SwiftMessages'
 
 end

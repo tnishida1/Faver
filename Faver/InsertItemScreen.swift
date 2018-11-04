@@ -43,6 +43,7 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
     var inputAmount = 0
     var useByDate = 0
     var curDate = Date()
+    var popUpInput: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,59 +59,71 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
         ramReel = RAMReel(frame: view2.bounds, dataSource: dataSource, placeholder: "Enter an item…", attemptToDodgeKeyboard: false) {
             print("Plain:", $0)
             self.showCustomDialog()
+            
         }
         
         ramReel.hooks.append {
-            
+            /*
             do {
                 try self.context.save()
             }
             catch {
                 print(error)
-            }
+            }*/
+            
             //self.fetchData()
-            let content = UNMutableNotificationContent()
+            //let content = UNMutableNotificationContent()
+            
+            //let myList = NSEntityDescription.insertNewObject(forEntityName: "List", into: self.context)
+            //self.savedText = $0
             
             
-            
-            
-
             
             /*
-            
-             let rangeMin = listArray.count - inputAmount
-             let rangeMax = listArray.count - 1
-             for item in rangeMin...rangeMax {
-             let content = UNMutableNotificationContent()
+             if textField.text != "" {
              
-             let itemQ :String = String(listArray[item].itemQuantity)
-             content.title = "Your " + listArray[item].itemName! + " is going to spoil soon!"
-             content.body = "You have " + itemQ + " " + listArray[item].itemMeasure! + " " + listArray[item].itemName! + " that you have not used yet."
-             content.threadIdentifier = "faver"
-             content.badge = globalNotificationNum as NSNumber
+             let myList = NSEntityDescription.insertNewObject(forEntityName: "List", into: context)
              
-             //let number = arc4random_uniform(10) + 10
-             
-             //here is where we set the time for the notification
-             if listArray[item].shelfLife == nil {
-             let number = 5
-             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(number), repeats: false)
-             let request = UNNotificationRequest(identifier: listArray[item].itemName!, content: content, trigger: trigger)
-             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+             strArray = savedText!.components(separatedBy: " ")
+             if strArray.count > 1 && strArray.count < 4
+             {
+             if strArray.count == 3 { //4 oz peanuts
+             myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
+             myList.setValue(strArray[1], forKey: "itemMeasure")
+             myList.setValue(strArray[2], forKey: "itemName")
+             globalVar.currentItem = strArray[2]
+             }
+             else{ //2 banana
+             myList.setValue(Int(strArray[0]), forKey: "itemQuantity")
+             myList.setValue("whole", forKey: "itemMeasure")
+             myList.setValue(strArray[1], forKey: "itemName")
+             globalVar.currentItem = strArray[1]
+             }
+             globalNotificationNum += 1
+             inputAmount+=1
              }
              else {
-             let timeInterval = listArray[item].shelfLife?.timeIntervalSinceNow
-             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval!, repeats: false)
-             let request = UNNotificationRequest(identifier: listArray[item].itemName!, content: content, trigger: trigger)
-             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+             print("incorrect input buddy")
+             return false;
              }
              }
-             inputAmount = 0
-             
-             self.performSegue(withIdentifier: "goToList", sender: self)
+             else {
+             print("incorrect input buddy")
+             return false;
              }
              
-            }*/
+             do {
+             try context.save()
+             }
+             catch {
+             print(error)
+             }
+             if useByDate == 1
+             {
+             self.performSegue(withIdentifier: "homeToDate", sender: self)
+             }
+             return true
+ */
             
             let r = Array($0.reversed())
             let j = String(r)
@@ -317,17 +330,28 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
         
         // Create first button
         let buttonOne = CancelButton(title: "CANCEL", height: 60) {
-            print("You canceled the rating dialog")
         }
         
         // Create second button
-        let buttonTwo = DefaultButton(title: "RATE", height: 60) {
-            print("You rated \(ratingVC.cosmosStarRating.rating) stars")
+        let buttonTwo = DefaultButton(title: "DONE", height: 60) {
+            print(ratingVC.commentTextField.text!)
+            self.popUpInput = ratingVC.commentTextField.text!
+            
+            let curItem = NSEntityDescription.insertNewObject(forEntityName: "List", into: self.context)
+            
+            curItem.setValue("jjj", forKey: "itemQuantity")
+            curItem.setValue("wefwe", forKey: "itemMeasure")
+            curItem.setValue("eee", forKey: "itemName")
+            
+            
+            
+            
+            
         }
         
         // Add buttons to dialog
         popup.addButtons([buttonOne, buttonTwo])
-        
+    
         
         // Present dialog
         present(popup, animated: animated, completion: nil)
