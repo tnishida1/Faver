@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		835022D891ABF12E9A140547 /* Pods_Faver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6511EC730C8718B440A54510 /* Pods_Faver.framework */; };
 		E104976D217F4A8A00570B16 /* item.plist in Resources */ = {isa = PBXBuildFile; fileRef = E104976C217F4A8A00570B16 /* item.plist */; };
-		E104977621808CC000570B16 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E104977421808CC000570B16 /* RatingViewController.swift */; };
-		E104977921808D5900570B16 /* RatingViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = E104977421808CC000570B16 /* RatingViewController.swift */; };
-		E104977B21808E0E00570B16 /* RatingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E104977A21808E0E00570B16 /* RatingViewController.xib */; };
 		E12E6A4F2145E66400AAE7DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A4E2145E66400AAE7DF /* AppDelegate.swift */; };
 		E12E6A542145E66400AAE7DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E12E6A522145E66400AAE7DF /* Main.storyboard */; };
 		E12E6A562145E66500AAE7DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E12E6A552145E66500AAE7DF /* Assets.xcassets */; };
@@ -19,8 +16,8 @@
 		E12E6A6F2145E66600AAE7DF /* FaverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A6E2145E66600AAE7DF /* FaverUITests.swift */; };
 		E12E6A7D2145E6D600AAE7DF /* InsertItemScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */; };
 		E1B94B4D217F0779001B5560 /* data.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1B94B4C217F0779001B5560 /* data.txt */; };
-		E1BA85C2218EDBAF0007ADE6 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BA85C1218EDBAF0007ADE6 /* CosmosDistrib.swift */; };
 		E1BA85C5218EDC580007ADE6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1BA85C4218EDC580007ADE6 /* Default-568h@2x.png */; };
+		E1BA85CD218F14D00007ADE6 /* segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BA85CC218F14D00007ADE6 /* segues.swift */; };
 		E1BDEBB2216DEC0100CDA2EB /* ListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BDEBB1216DEC0000CDA2EB /* ListScreen.swift */; };
 		E1D2FE82214B3D0D0016C9AF /* Faver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1D2FE80214B3D0D0016C9AF /* Faver.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -48,8 +45,6 @@
 		D915FC441918CC3344693849 /* Pods-Faver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Faver/Pods-Faver.debug.xcconfig"; sourceTree = "<group>"; };
 		E0BB2BC3D719C356C017D3A0 /* Pods-Faver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Faver.release.xcconfig"; path = "Pods/Target Support Files/Pods-Faver/Pods-Faver.release.xcconfig"; sourceTree = "<group>"; };
 		E104976C217F4A8A00570B16 /* item.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = item.plist; sourceTree = "<group>"; };
-		E104977421808CC000570B16 /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
-		E104977A21808E0E00570B16 /* RatingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatingViewController.xib; sourceTree = "<group>"; };
 		E12E6A4B2145E66400AAE7DF /* Faver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Faver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E12E6A4E2145E66400AAE7DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E12E6A532145E66400AAE7DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,8 +58,8 @@
 		E12E6A702145E66600AAE7DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertItemScreen.swift; sourceTree = "<group>"; };
 		E1B94B4C217F0779001B5560 /* data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.txt; sourceTree = "<group>"; };
-		E1BA85C1218EDBAF0007ADE6 /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 		E1BA85C4218EDC580007ADE6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E1BA85CC218F14D00007ADE6 /* segues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = segues.swift; sourceTree = "<group>"; };
 		E1BDEBB1216DEC0000CDA2EB /* ListScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListScreen.swift; sourceTree = "<group>"; };
 		E1D2FE81214B3D0D0016C9AF /* Faver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Faver.xcdatamodel; sourceTree = "<group>"; };
 		E788DBA183A3EFA001184C1D /* Pods_FaverUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaverUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,7 +138,7 @@
 			children = (
 				E1BA85C3218EDC1A0007ADE6 /* dependencies */,
 				E12E6A7C2145E6D600AAE7DF /* InsertItemScreen.swift */,
-				E104977A21808E0E00570B16 /* RatingViewController.xib */,
+				E1BA85CC218F14D00007ADE6 /* segues.swift */,
 				E12E6A522145E66400AAE7DF /* Main.storyboard */,
 				E1BDEBB1216DEC0000CDA2EB /* ListScreen.swift */,
 				E12E6A5A2145E66600AAE7DF /* Info.plist */,
@@ -174,8 +169,6 @@
 			children = (
 				E12E6A552145E66500AAE7DF /* Assets.xcassets */,
 				E12E6A4E2145E66400AAE7DF /* AppDelegate.swift */,
-				E104977421808CC000570B16 /* RatingViewController.swift */,
-				E1BA85C1218EDBAF0007ADE6 /* CosmosDistrib.swift */,
 				E1B94B4C217F0779001B5560 /* data.txt */,
 				E104976C217F4A8A00570B16 /* item.plist */,
 				E1D2FE80214B3D0D0016C9AF /* Faver.xcdatamodeld */,
@@ -291,10 +284,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E104977921808D5900570B16 /* RatingViewController.swift in Resources */,
 				E104976D217F4A8A00570B16 /* item.plist in Resources */,
 				E12E6A562145E66500AAE7DF /* Assets.xcassets in Resources */,
-				E104977B21808E0E00570B16 /* RatingViewController.xib in Resources */,
 				E1B94B4D217F0779001B5560 /* data.txt in Resources */,
 				E1BA85C5218EDC580007ADE6 /* Default-568h@2x.png in Resources */,
 				E12E6A542145E66400AAE7DF /* Main.storyboard in Resources */,
@@ -370,11 +361,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1BDEBB2216DEC0100CDA2EB /* ListScreen.swift in Sources */,
-				E104977621808CC000570B16 /* RatingViewController.swift in Sources */,
 				E12E6A4F2145E66400AAE7DF /* AppDelegate.swift in Sources */,
 				E12E6A7D2145E6D600AAE7DF /* InsertItemScreen.swift in Sources */,
+				E1BA85CD218F14D00007ADE6 /* segues.swift in Sources */,
 				E1D2FE82214B3D0D0016C9AF /* Faver.xcdatamodeld in Sources */,
-				E1BA85C2218EDBAF0007ADE6 /* CosmosDistrib.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

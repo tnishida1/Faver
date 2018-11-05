@@ -9,8 +9,8 @@ import UIKit
 import RAMAnimatedTabBarController
 import RAMReel
 import CoreData
-import PopupDialog
 import UserNotifications
+import SwiftMessages
 
 extension String {
     var isNumeric : Bool {
@@ -45,6 +45,18 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
     var curDate = Date()
     var popUpInput: String!
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let navigationVC = segue.destination as! UINavigationController
+        let rootVC = navigationVC.viewControllers.first!
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(hide))
+        rootVC.navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    @objc private func hide() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,8 +70,12 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
         dataSource = SimplePrefixQueryDataSource(data)
         ramReel = RAMReel(frame: view2.bounds, dataSource: dataSource, placeholder: "Enter an item…", attemptToDodgeKeyboard: false) {
             print("Plain:", $0)
-            self.showCustomDialog()
             
+            let childVC = self.storyboard!.instantiateViewController(withIdentifier: "Popup")
+            //let segue = BottomCardSegue(identifier: nil, source: self, destination: childVC)
+            let segue = SwiftMessagesCenteredSegue(identifier: nil, source: self, destination: childVC)
+            self.prepare(for: segue, sender: nil)
+            segue.perform()
         }
         
         ramReel.hooks.append {
@@ -312,49 +328,6 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
         catch {
             print(error)
         }
-    }
-    
-    
-    func showCustomDialog(animated: Bool = true) {
-        
-        // Create a custom view controller
-        let ratingVC = RatingViewController(nibName: "RatingViewController", bundle: nil)
-        
-        
-        // Create the dialog
-        let popup = PopupDialog(viewController: ratingVC,
-                                buttonAlignment: .horizontal,
-                                transitionStyle: .bounceDown,
-                                tapGestureDismissal: true,
-                                panGestureDismissal: false)
-        
-        // Create first button
-        let buttonOne = CancelButton(title: "CANCEL", height: 60) {
-        }
-        
-        // Create second button
-        let buttonTwo = DefaultButton(title: "DONE", height: 60) {
-            print(ratingVC.commentTextField.text!)
-            self.popUpInput = ratingVC.commentTextField.text!
-            
-            let curItem = NSEntityDescription.insertNewObject(forEntityName: "List", into: self.context)
-            
-            curItem.setValue("jjj", forKey: "itemQuantity")
-            curItem.setValue("wefwe", forKey: "itemMeasure")
-            curItem.setValue("eee", forKey: "itemName")
-            
-            
-            
-            
-            
-        }
-        
-        // Add buttons to dialog
-        popup.addButtons([buttonOne, buttonTwo])
-    
-        
-        // Present dialog
-        present(popup, animated: animated, completion: nil)
     }
     
     
