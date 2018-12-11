@@ -12,23 +12,10 @@ import CoreData
 import UserNotifications
 import SwiftMessages
 
-extension String {
-    var isNumeric : Bool {
-        get {
-            return Double(self) != nil
-        }
-    }
-}
-
 class InsertItemScreen: UIViewController, UITextFieldDelegate,
     UICollectionViewDelegate {
 
     @IBOutlet weak var view2: UIView!
-    @IBOutlet weak var textField: UITextField!
-    
-    @IBOutlet weak var useageDateSwitch: UISwitch!
-    @IBOutlet weak var dateSelector: UIDatePicker!
-    @IBOutlet weak var error: UITextView!
     
     private var datePicker: UIDatePicker?
     
@@ -36,6 +23,7 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
     var ramReel: RAMReel<RAMCell, RAMTextField, SimplePrefixQueryDataSource>!
     
     var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var myList = NSManagedObject.init()
     var savedText: String!
     var strArray = [String]()
     var listArray:[List] = []
@@ -44,7 +32,6 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
     var useByDate = 0
     var curDate = Date()
     var popUpInput: String!
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let navigationVC = segue.destination as! UINavigationController
@@ -57,25 +44,94 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
         dismiss(animated: true, completion: nil)
     }
     
+    @IBOutlet weak var dateUnitsVar: UITextField!
+    @IBAction func dateUnits(_ sender: Any) {
+    }
+    
+    @IBOutlet weak var noDateUnitsVar: UITextField!
+    @IBAction func noDateUnits(_ sender: Any) {
+    }
+    
+    @IBOutlet weak var dateQuantityVar: UITextField!
+    @IBAction func dateQuantity(_ sender: Any) {
+    }
+    
+    @IBOutlet weak var noDateQuantityVar: UITextField!
+    @IBAction func noDateQuantity(_ sender: Any) {
+    }
+    
+    @IBOutlet weak var popupDateVar: UIDatePicker!
+    @IBAction func popupDate(_ sender: Any) {
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        datePicker = dateSelector
-        datePicker?.datePickerMode = .date
-        datePicker?.addTarget(self, action: #selector(InsertItemScreen.dateChanged(datePicker:)), for: .valueChanged)
         
         UIApplication.shared.applicationIconBadgeNumber = 0
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
         
         dataSource = SimplePrefixQueryDataSource(data)
         ramReel = RAMReel(frame: view2.bounds, dataSource: dataSource, placeholder: "Enter an item…", attemptToDodgeKeyboard: false) {
-            print("Plain:", $0)
-            
-            let childVC = self.storyboard!.instantiateViewController(withIdentifier: "Popup")
-            //let segue = BottomCardSegue(identifier: nil, source: self, destination: childVC)
-            let segue = SwiftMessagesCenteredSegue(identifier: nil, source: self, destination: childVC)
-            self.prepare(for: segue, sender: nil)
-            segue.perform()
+            if $0 != "" {
+                print("Plain:", $0)
+                
+                //new item to enter into DB
+                var flag = 0
+                
+                self.myList = NSEntityDescription.insertNewObject(forEntityName: "List", into: self.context)
+                
+                if let path = Bundle.main.path(forResource: "item", ofType: "plist") {
+                    
+                    //If your plist contain root as Array
+                    if let root = NSArray(contentsOfFile: path) as? [[String: Any]] {
+                        
+                        for item in root {
+                            if($0.caseInsensitiveCompare((item["name"] as! String)) == .orderedSame) {
+                            //if $0 == item["name"] as! String {
+                                print($0)
+                                self.myList.setValue($0, forKey: "itemName")
+                                let time = (Int)(item["dOP_Refrigerate_Min"] as! String)
+                                
+                                if (item["dOP_Refrigerate_Metric"] as! String) == "Days" {
+                                    let today = Date()
+                                    let date = Calendar.current.date(byAdding: .day, value: time ?? 0, to: today)
+                                    self.myList.setValue(date, forKey: "shelfLife")
+                                }
+                                else if (item["dOP_Refrigerate_Metric"] as! String) == "Weeks" {
+                                    let today = Date()
+                                    let date = Calendar.current.date(byAdding: .weekOfMonth, value: time ?? 0, to: today)
+                                    self.myList.setValue(date, forKey: "shelfLife")
+                                }
+                                else if (item["dOP_Refrigerate_Metric"] as! String) == "Months" {
+                                    let today = Date()
+                                    let date = Calendar.current.date(byAdding: .month, value: time ?? 0, to: today)
+                                    self.myList.setValue(date, forKey: "shelfLife")
+                                }
+                                
+                                print(item["dOP_Refrigerate_Metric"] ?? "null")
+                                print(item["dOP_Refrigerate_Min"] ?? "empty")
+                                flag = 1
+                            }
+                        }
+                    }
+                }
+                if flag == 0 {
+                    let childVC = self.storyboard!.instantiateViewController(withIdentifier: "Popup")
+                    //let segue = BottomCardSegue(identifier: nil, source: self, destination: childVC)
+                    let segue = SwiftMessagesCenteredSegue(identifier: nil, source: self, destination: childVC)
+                    self.prepare(for: segue, sender: nil)
+                    segue.perform()
+                }
+                else {
+                    let childVC = self.storyboard!.instantiateViewController(withIdentifier: "PopupNoDate")
+                    //let segue = BottomCardSegue(identifier: nil, source: self, destination: childVC)
+                    let segue = SwiftMessagesCenteredSegue(identifier: nil, source: self, destination: childVC)
+                    self.prepare(for: segue, sender: nil)
+                    segue.perform()
+                }
+            }
         }
         
         ramReel.hooks.append {
@@ -140,10 +196,11 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
              }
              return true
  */
-            
-            let r = Array($0.reversed())
-            let j = String(r)
-            print("Reversed:", j)
+            if $0 != "" {
+                let r = Array($0.reversed())
+                let j = String(r)
+                print("Reversed:", j)
+            }
         }
         
         
@@ -151,6 +208,7 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
         ramReel.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
+    /*
     func createNotif(str: String) -> Void {
         
             if textField.text != "" {
@@ -199,38 +257,7 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
             self.performSegue(withIdentifier: "goToList", sender: self)
         }
         
-    }
-    
-    @objc func dateChanged(datePicker: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        curDate = datePicker.date
-        view.endEditing(true)
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
-    @IBAction func switchAction(_ sender: UISwitch) {
-        if sender.isOn == true {
-            useByDate = 1
-            dateSelector.isEnabled = true
-            dateSelector.isHidden = false
-        }
-        else {
-            useByDate = 0
-            dateSelector.isEnabled = false
-            dateSelector.isHidden = true
-        }
-    }
-    
-    func issueError() {
-        error.layer.opacity = 1
-        UIView.animate(withDuration: 1, animations: {
-            self.error.layer.opacity = 0
-        })
-    }
+    }*/
     
     func handleItem(item: String) -> Bool {
         
@@ -263,13 +290,8 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
         }
         return true
     }
-
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        return false
-    }
-    
+    /*
     @IBAction func donePressed(_ sender: Any) {
         if textField.text != "" {
             strArray = textField.text!.components(separatedBy: " ")
@@ -316,7 +338,7 @@ class InsertItemScreen: UIViewController, UITextFieldDelegate,
         inputAmount = 0
         
         self.performSegue(withIdentifier: "goToList", sender: self)
-    }
+    }*/
     
     func fetchData(){
         
