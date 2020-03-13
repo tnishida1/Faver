@@ -1,2 +1,4 @@
 # Faver
-It's an app. About saving food 🤷‍♂️
+It's an app. About saving food.
+
+![](/img/Faver.png)
